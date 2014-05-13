@@ -1,7 +1,7 @@
 less-inotify
 ============
 
-Usage: less_inotify.sh <path_to_dir_with_less_files> <less_filename>  
+Usage: less_inotify.sh \<path_to_dir_with_less_files\> \<less_filename\>  
 less_filename -- main less filename without extension.  
 Output css file will be compiled with the same name.  
   
