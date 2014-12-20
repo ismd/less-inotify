@@ -18,6 +18,10 @@ do
         continue
     fi
 
+    if [[ $BASENAME == .* ]]; then
+        continue
+    fi
+
     DIRNAME=$(dirname ${FILENAME})
     if [ -f "$DIRNAME/_include.less" ]; then
         ls -1 --file-type $DIRNAME | grep '.less$' | grep -v '_include.less' | grep -v '/' | grep -v '~' | sed 's/^\(.*\)$/@import "\1";/' > "$DIRNAME/_include.less"
