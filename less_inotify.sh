@@ -2,7 +2,9 @@
 DIR=$1
 LESS_FILENAME=$1"/"$2".less"
 CSS_FILENAME=$1"/"$2".css"
-MAP_FILENAME=$1"/"$2".map"
+MAP_FILENAME=$2".map"
+
+cd $DIR
 
 while FILENAME=$(inotifywait --format %w%f -qre close_write $DIR)
 do
@@ -21,5 +23,6 @@ do
         ls -1 --file-type $DIRNAME | grep '.less$' | grep -v '_include.less' | grep -v '/' | grep -v '~' | sed 's/^\(.*\)$/@import "\1";/' > "$DIRNAME/_include.less"
     fi
 
-    /usr/bin/lessc --compress --no-color --source-map=$MAP_FILENAME --source-map-rootpath=/local/css $LESS_FILENAME > $CSS_FILENAME
+    echo "File $BASENAME has been changed"
+    /usr/bin/lessc --compress --no-color --source-map=$MAP_FILENAME $LESS_FILENAME > $CSS_FILENAME
 done
